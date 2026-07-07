@@ -4,12 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node ./src/server.js"
+    "start": "node ./dist/server.js",
+    "dev": "node ./src/server.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "express": "^5.2.1",
     "mongoose": "^9.7.3"
