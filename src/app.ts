@@ -1,4 +1,5 @@
 import express from 'express';
+import { errorHandler } from './middleware/errorHandler.middleware';
 
 //create instance of express
 const app = express();
@@ -19,15 +20,18 @@ app.get("/", (req,res) => {
 //using routes
 
 //error routes
-app.use((req,res) => {
+app.use((req,res, next) => {
     const message = `Cannot ${req.method} on ${req.path}`;
+    const error: any = new Error(message);
+    error.status= "fail";
+    error.statusCode= 404;
 
-    res.status(404).json({
-        message,
-        status: 'fail',
-        success: false,
-        data: "null"
-    })
-})
+    next(error);
+});
+
+
+// error handler middleware
+
+app.use(errorHandler);
 
 export default app;
